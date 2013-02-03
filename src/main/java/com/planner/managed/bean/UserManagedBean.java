@@ -2,6 +2,7 @@ package com.planner.managed.bean;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,36 +55,25 @@ public class UserManagedBean implements Serializable
 	}
 	
 	
-	public StreamedContent getImage() throws IOException
-	{
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        //if (context.getRenderResponse())
-        //{
-         //   // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
-         //   return new DefaultStreamedContent();
-       // }
-       // else {
-            // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
-        
-        Map<String, String> test = context.getExternalContext().getRequestParameterMap();
-        
-            String id = context.getExternalContext().getRequestParameterMap().get("id");
-            byte[] image = getUserService().getUserById( Integer.valueOf(id) ).getImage();
-            return new DefaultStreamedContent(new ByteArrayInputStream( image ));
-       // }
-    }
-	
-	
 	public List<User> getUserList()
 	{
 		userList = new ArrayList<User>();
-		userList.addAll( getUserService().getUsers());
-		
-		for (User u : userList)
+		for (User u : getUserService().getUsers())
 		{
-			u.getImage();
+			getUserService().getUserById( u.getUserID() );
+			
+			byte[] img = u.getImage();
+			
+			if (img != null)
+			{
+				InputStream in = new ByteArrayInputStream( img );
+				u.setDisplayImage( new DefaultStreamedContent( in, "image/jpeg" ));
+			}
+			
+			userList.add( u );
 		}
+		
+		
 		return userList;
 	}
 	

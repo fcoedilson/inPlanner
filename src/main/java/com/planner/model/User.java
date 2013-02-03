@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.primefaces.model.StreamedContent;
 
 @Entity
 @Table(name="USERS")
@@ -20,6 +23,7 @@ public class User implements Comparable<User>
 	private String emailAddress;
 	private String imageName;
 	private byte[] image;
+	private StreamedContent displayImage;
 	
 	@Id
 	@GeneratedValue
@@ -115,5 +119,15 @@ public class User implements Comparable<User>
 		}
 		
 		return retVal;
+	}
+	
+	@Transient
+	public StreamedContent getDisplayImage()
+	{
+		return displayImage;
+	}
+	public void setDisplayImage( StreamedContent displayImage )
+	{
+		this.displayImage = displayImage;
 	}
 }

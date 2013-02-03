@@ -2,6 +2,8 @@ package com.planner.user.dao;
 
 import java.util.List;
 import com.planner.model.User;
+
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 
 public class UserDAO implements IUserDAO {
@@ -41,8 +43,12 @@ public class UserDAO implements IUserDAO {
 	@SuppressWarnings("rawtypes")
 	public User getUserById( int id )
 	{
-		List list = getSessionFactory().getCurrentSession().createQuery( "from USERS where user_id=?" ).setParameter( 0, id ).list();
-		return (User)list.get(0);
+		List list = getSessionFactory().getCurrentSession().createQuery( "from User where user_id=?" ).setParameter( 0, id ).list();
+		
+		User u = (User) list.get(0);
+		Hibernate.initialize( u.getImage() );
+		
+		return u;
 	}
 
 
