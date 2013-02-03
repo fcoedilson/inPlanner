@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
+ <h:head><title>Welcome</title></h:head>
+ <h:body>
+     <h:form enctype="multipart/form-data">
+         <table>
+             <tr>
+                <td><h:outputLabel for="id" value="Email Address: " /></td>
+                <td><p:inputText id="id" value="#{userMB.userInfo.emailAddress}">
+                		<f:validator validatorId="emailAddressValidator" />
+						<p:ajax event="blur" update="emailAddress" />
+                    </p:inputText>
+                    <p:message id="emailAddress" for="id" display="icon"/>
+                </td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="First Name" value="First Name: " /></td>
+                <td><p:inputText id="name" value="#{userMB.userInfo.firstName}">
+                        <f:validateLength minimum="5" />
+                        <p:ajax event="blur" update="nameMsg" />
+                    </p:inputText>
+                    <p:message id="nameMsg" for="name" display="icon"/>
+                </td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="Last Name" value="Last Name: " /></td>
+                <td><p:inputText id="surname" value="#{userMB.userInfo.lastName}">
+                        <f:validateLength minimum="5" />
+                        <p:ajax event="blur" update="surnameMsg" />
+                    </p:inputText>
+                    <p:message id="surnameMsg" for="surname" display="icon"/>
+                </td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="Nick Name" value="Nick Name: " /></td>
+                <td><p:inputText id="nickName" value="#{userMB.userInfo.nickName}">
+                        <f:validateLength minimum="5" />
+                        <p:ajax event="blur" update="nickNameMsg" />
+                    </p:inputText>
+                    <p:message id="nickNameMsg" for="surname" display="icon"/>
+                </td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="Picture" value="Picture: " /></td>
+                <td><p:fileUpload  value="#{userMB.file}" mode="simple"/>
+                </td>
+             </tr>
+             <tr>
+                <td><p:commandButton id="addUser" value="Add" action="#{userMB.addUserAction}" ajax="false"/></td>
+                <td><p:commandButton id="reset" value="Reset" action="#{userMB.reset}" ajax="false"/></td>
+             </tr>
+         </table>
+     </h:form>
+</h:body>
+</html> 
