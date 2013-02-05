@@ -29,9 +29,17 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">
+					<h:outputText value="Image Name" />
+				</f:facet>
+				<h:outputText value="#{user.imageName}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
 					<h:outputText value="Image" />
 				</f:facet>
-				<p:graphicImage value="#{user.displayImage}" />
+				<p:graphicImage value="#{userMB.images}" rendered="#{user.imageName != ''}">
+					<f:param id="id"  name="id" value="{#user.userID}" />
+				</p:graphicImage>
 			</p:column>
 		</p:dataTable>
 	</h:form>
