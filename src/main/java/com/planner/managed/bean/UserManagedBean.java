@@ -1,26 +1,16 @@
 package com.planner.managed.bean;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-
 import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.dao.DataAccessException;
-
 import com.planner.model.User;
 import com.planner.user.service.IUserService;
 
@@ -78,26 +68,6 @@ public class UserManagedBean implements Serializable
 		
 		
 		return userList;
-	}
-	
-	
-	public StreamedContent getImages()
-	{
-		FacesContext context = FacesContext.getCurrentInstance();
-		
-		if (context.getRenderResponse())
-		{
-			return new DefaultStreamedContent();
-		}
-		else
-		{
-			ExternalContext externalContext = context.getExternalContext();
-			String id = externalContext.getRequestParameterMap().get( "id" );
-			
-			User u = userList.get( 10 );
-			
-			return u.getDisplayImage();
-		}
 	}
 	
 

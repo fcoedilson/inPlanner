@@ -37,9 +37,7 @@
 				<f:facet name="header">
 					<h:outputText value="Image" />
 				</f:facet>
-				<p:graphicImage value="#{userMB.images}" rendered="#{user.imageName != ''}">
-					<f:param id="id"  name="id" value="{#user.userID}" />
-				</p:graphicImage>
+				<img src="/inPlanner/imageController/#{user.userID}" />
 			</p:column>
 		</p:dataTable>
 	</h:form>

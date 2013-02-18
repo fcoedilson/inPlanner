@@ -8,15 +8,6 @@
 		 
 	  <display-name>in Planer</display-name>
 	
-	<servlet>
-		<servlet-name>DisplayImages</servlet-name>
-        <servlet-class>com.planner.servlet.DisplayImages</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DisplayImages</servlet-name>
-        <url-pattern>/Images</url-pattern>
-    </servlet-mapping>
-	  
 	  <!-- Spring Context Configuration' s Path definition -->
       <context-param>
 	     <param-name>contextConfigLocation</param-name>
@@ -35,6 +26,11 @@
 		<listener-class>
 			org.springframework.web.context.request.RequestContextListener
 		</listener-class>
+	  </listener>
+	  <listener>
+	  	<listener-class>
+	  		org.springframework.web.context.ContextLoaderListener
+	  	</listener-class>
 	  </listener>
 	 
 	  <!-- Project Stage Level -->
@@ -55,6 +51,23 @@
 	    <load-on-startup>1</load-on-startup>
 	  </servlet>
 	  
+	  <servlet>
+	    <servlet-name>dispatcher</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	    	<param-name>contextConfigLocation</param-name>
+	    	<param-value>/WEB-INF/Dispatcher-servlet.xml</param-value>
+	    </init-param>
+	    <load-on-startup>2</load-on-startup>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>dispatcher</servlet-name>
+	  	<url-pattern>*.html</url-pattern>
+	  </servlet-mapping>
+	  <session-config>
+	  	<session-timeout>30</session-timeout>
+	  </session-config>
+	
 	  <!-- Mapping with servlet and url for the http requests. -->
 	  <servlet-mapping>
 	    <servlet-name>Faces Servlet</servlet-name>
